@@ -15,7 +15,7 @@
             @endif
         </div>
         <div>
-            {!! Form::open(['route' => 'projects.store']) !!}
+            {!! Form::open(['route' => 'projects.store', 'class' => 'create-project-form']) !!}
                 {!! Form::label('project_number', 'Projektnummer') !!}
                 {!! Form::text('project_number', '', ['required']) !!}
                 <br />
@@ -25,7 +25,7 @@
                 <br />
 
                 {!! Form::label('type', 'Art der Aktion') !!}
-                {!! Form::select('type', $projectTypes) !!}
+                {!! Form::select('type', $projectTypes, '', ['class' => 'select-project-type']) !!}
                 <br />
 
                 {!! Form::label('start_date', 'Aktionszeitraum von') !!}
@@ -36,16 +36,16 @@
                 {!! Form::text('end_date', '', ['required']) !!}
                 <br />
 
-                {!! Form::label('liability_max', 'Maximalbetrag Verbindlichkeit') !!}
-                {!! Form::text('liability_max', '', ['required']) !!}
+                {!! Form::label('liability_max', 'Maximalbetrag Verbindlichkeit', ['class' => 'toggled-liability']) !!}
+                {!! Form::text('liability_max', '', ['required', 'class' => 'toggled-liability']) !!}
                 <br />
 
-                {!! Form::label('liability_min', 'Minimalbetrag Verbindlichkeit') !!}
-                {!! Form::text('liability_min', '', ['required']) !!}
+                {!! Form::label('liability_min', 'Minimalbetrag Verbindlichkeit', ['class' => 'toggled-liability']) !!}
+                {!! Form::text('liability_min', '', ['required', 'class' => 'toggled-liability']) !!}
                 <br />
 
-                {!! Form::label('currency', 'Währung') !!}
-                {!! Form::select('currency', $currencies, '', ['required']) !!}
+                {!! Form::label('currency', 'Währung', ['class' => 'toggled-liability']) !!}
+                {!! Form::select('currency', $currencies, '', ['required', 'class' => 'toggled-liability']) !!}
                 <br />
 
                 {!! Form::label('countries', 'Teilnehmende Länder') !!}

@@ -6,8 +6,9 @@
 
         <title>Gweb-Probeaufgabe</title>
 
-        <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
-        <script src="/js/main.js" defer></script>
+        <link href="/css/app.css" rel="stylesheet" type="text/css"/>
+        <script src="/js/jquery.min.js" defer></script>
+        <script src="/js/app.js" defer></script>
     </head>
     <body>
             @yield('content')

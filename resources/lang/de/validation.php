@@ -97,7 +97,7 @@ return [
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => ':attribute muss eine Nummer sein.',
+    'numeric' => ':attribute muss eine Zahl sein.',
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'prohibited' => 'The :attribute field is prohibited.',
