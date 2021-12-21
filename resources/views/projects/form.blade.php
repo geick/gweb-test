@@ -15,7 +15,7 @@
             @endif
         </div>
         <div>
-            {!! Form::open(['route' => 'projects.store', 'class' => 'create-project-form', 'files' => true]) !!}
+            {!! Form::open(['route' => 'projects.store', 'class' => 'project-form', 'files' => true]) !!}
                 {!! Form::hidden('project_id', !is_null($project) ? $project->id : '') !!}
 
                 {!! Form::label('project_number', 'Projektnummer *') !!}
@@ -27,11 +27,15 @@
                 {!! Form::label('type', 'Art der Aktion *') !!}
                 {!! Form::select('type', $projectTypes, !is_null($project) ? $project->type : '', ['class' => 'select-project-type']) !!}
 
+                @php
+                    $startDate = !is_null($project) ? \Carbon\Carbon::parse($project->start_date)->format('d.m.Y') : '';
+                    $endDate = !is_null($project) ? \Carbon\Carbon::parse($project->end_date)->format('d.m.Y') : '';
+                @endphp
                 {!! Form::label('start_date', 'Aktionszeitraum von *') !!}
-                {!! Form::text('start_date', !is_null($project) ? $project->start_date : '', ['required', 'class' => 'start-date']) !!}
+                {!! Form::text('start_date', $startDate, ['required', 'class' => 'start-date']) !!}
 
                 {!! Form::label('end_date', 'Aktionszeitraum bis *') !!}
-                {!! Form::text('end_date', !is_null($project) ? $project->end_date : '', ['required']) !!}
+                {!! Form::text('end_date', $endDate, ['required', 'class' => 'end-date']) !!}
 
                 {!! Form::label('liability_max', 'Maximalbetrag Verbindlichkeit *', ['class' => 'toggled-liability-field']) !!}
                 {!! Form::text('liability_max', !is_null($project) ? $project->liability_max : '', ['class' => 'toggled-liability-field']) !!}

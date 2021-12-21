@@ -10,10 +10,11 @@
         <link href="/css/datepicker.min.css" rel="stylesheet" type="text/css"/>
 
         <script src="/js/jquery.min.js" defer></script>
-        <script src="/js/datepicker.min.js" defer></script>
-        <script src="/js/app.js" defer></script>
+        <script src="https://unpkg.com/js-datepicker" defer></script>
+        <script src="{{ mix('/js/app.js') }}" defer></script>
     </head>
     <body>
         @yield('content')
+
     </body>
 </html>

@@ -8,7 +8,7 @@
 /***/ (() => {
 
 $(document).ready(function () {
-  if ($('.create-project-form').length) {
+  if ($('.project-form').length) {
     // Toggle fields depending on specific project type
     $('.select-project-type').change(function (event) {
       if ($(event.target).find('option:selected').text() === 'GzA') {
@@ -18,8 +18,21 @@ $(document).ready(function () {
       }
     }); // Cause default check when form is loaded
 
-    $('.select-project-type').trigger('change'); // startDate = datepicker('.create-project-form .start-date');
-    // endDate = datepicker('.create-project-form .end-date');
+    $('.select-project-type').trigger('change');
+    var startPicker = datepicker('.project-form .start-date', {
+      startDay: 1,
+      formatter: function formatter(input, date, instance) {
+        var value = date.toLocaleDateString('de-DE');
+        input.value = value;
+      }
+    });
+    var endPicker = datepicker('.project-form .end-date', {
+      startDay: 1,
+      formatter: function formatter(input, date, instance) {
+        var value = date.toLocaleDateString('de-DE');
+        input.value = value;
+      }
+    });
   }
 });
 
