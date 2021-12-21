@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    const datepicker = require('js-datepicker')
-
     if ($('.create-project-form').length) {
         // Toggle fields depending on specific project type
         $('.select-project-type').change(function(event) {
@@ -14,7 +12,7 @@ $(document).ready(function() {
         // Cause default check when form is loaded
         $('.select-project-type').trigger('change');
 
-        startDate = datepicker('.create-project-form .start-date');
-        endDate = datepicker('.create-project-form .end-date');
+        // startDate = datepicker('.create-project-form .start-date');
+        // endDate = datepicker('.create-project-form .end-date');
     }
 });

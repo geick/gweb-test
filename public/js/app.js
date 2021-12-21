@@ -5,11 +5,9 @@
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (() => {
 
 $(document).ready(function () {
-  var datepicker = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'js-datepicker'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
   if ($('.create-project-form').length) {
     // Toggle fields depending on specific project type
     $('.select-project-type').change(function (event) {
@@ -20,9 +18,8 @@ $(document).ready(function () {
       }
     }); // Cause default check when form is loaded
 
-    $('.select-project-type').trigger('change');
-    startDate = datepicker('.create-project-form .start-date');
-    endDate = datepicker('.create-project-form .end-date');
+    $('.select-project-type').trigger('change'); // startDate = datepicker('.create-project-form .start-date');
+    // endDate = datepicker('.create-project-form .end-date');
   }
 });
 

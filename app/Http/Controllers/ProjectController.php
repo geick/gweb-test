@@ -107,10 +107,11 @@ class ProjectController extends Controller
 
         // File upload
         if ($request->has('market_list')) {
-            $path = $request->file('market_list')
-                ->storeAs('market lists', $project->id. '.xls');
+            $file = $request->file('market_list');
+            $fileName = $project->id . '.' . $file->extension();
+            $file->storeAs('market lists', $fileName);
         }
 
-        return redirect('/');
+        return redirect(route('projects.index'));
     }
 }

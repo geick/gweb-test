@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProjectController::class, 'index']);
+Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
 
 Route::prefix('/projects')->group(function() {
     Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
