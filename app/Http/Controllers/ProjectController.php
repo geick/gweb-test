@@ -2,14 +2,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Config;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
     /**
      * Projects dashboard
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     function index()
     {
@@ -21,42 +23,36 @@ class ProjectController extends Controller
     /**
      * Form to create new project
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    function edit($projectId = 0)
+    function create()
+    {
+        $countries = Config::get('projects.countries');
+        $currencies = Config::get('projects.currencies');
+        $projectTypes = Config::get('projects.types');
+        $project = null;
+
+        return view('projects/form', compact([
+            'countries',
+            'currencies',
+            'projectTypes',
+            'project'
+        ]));
+    }
+
+    /**
+     * Form to edit existing project
+     *
+     * @return View
+     */
+    function edit($projectId)
     {
         $project = Project::find($projectId);
+        $countries = Config::get('projects.countries');
+        $currencies = Config::get('projects.currencies');
+        $projectTypes = Config::get('projects.types');
 
-        $countries = [
-            "D" => "D",
-            "AT" => "AT",
-            "CH" => "CH",
-            "LU" => "LU",
-            "BE" => "BE",
-            "NL" => "NL",
-            "FR" => "FR",
-            "IT" => "IT",
-            "ES" => "ES",
-            "GB" => "GB",
-        ];
-
-        $currencies = [
-            "€",
-            "£"
-        ];
-
-        $projectTypes = [
-            "Prämienbestellung",
-            "Gewinnspiel",
-            "Verlosung",
-            "GzA",
-            "Prämie",
-            "Verlosung",
-            "Prämie",
-            "Gewinnspiel",
-        ];
-
-        return view('projects/create', compact([
+        return view('projects/form', compact([
             'countries',
             'currencies',
             'projectTypes',
@@ -67,12 +63,12 @@ class ProjectController extends Controller
     /**
      * Validate and save form data project
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     function store(Request $request)
     {
         if (!$request->validate([
-            'project_number' => 'required|unique:projects|regex:/\d{5}-\d{4}/',
+            'project_number' => 'required|regex:/\d{5}-\d{4}/',
             'name'           => 'required|string',
             'type'           => 'required',
             'start_date'     => 'date',
@@ -89,6 +85,7 @@ class ProjectController extends Controller
 
         Project::updateOrCreate([
             'id'     => $request['project_id'],
+        ],[
             'project_number' => $request['project_number'],
             'name'           => $request['name'],
             'type'           => $request['type'],

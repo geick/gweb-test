@@ -6,7 +6,7 @@
 
     <section>
         <div>
-            <a href="{{ route('projects.edit') }}">
+            <a href="{{ route('projects.create') }}">
                 Neues Projekt anlegen
             </a>
         </div>
@@ -33,7 +33,7 @@
                                 <td>{{ $project->start_date }}</td>
                                 <td>{{ $project->end_date }}</td>
                                 <td>
-                                    <a href="{{ route('projects.edit') }}/{{ $project->id }}">Edit</a>
+                                    <a href="{{ route('projects.edit', $project->id) }}">Edit</a>
                                     <a href="">Archive</a>
                                 </td>
                             </tr>
