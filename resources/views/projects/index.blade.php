@@ -30,11 +30,11 @@
                             <tr>
                                 <td>{{ $project->project_number }}</td>
                                 <td>{{ $project->name }}</td>
-                                <td>{{ $project->start_date }}</td>
-                                <td>{{ $project->end_date }}</td>
+                                <td>{{ \Carbon\Carbon::parse($project->start_date)->format('d.m.Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($project->end_date)->format('d.m.Y') }}</td>
                                 <td>
-                                    <a href="{{ route('projects.edit', $project->id) }}">Edit</a>
-                                    <a href="">Archive</a>
+                                    <a href="{{ route('projects.edit', $project->id) }}">Bearbeiten</a>
+                                    <a href="">Archivieren</a>
                                 </td>
                             </tr>
                         @endforeach

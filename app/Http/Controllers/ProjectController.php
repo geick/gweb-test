@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Carbon\Carbon;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -83,14 +84,17 @@ class ProjectController extends Controller
                 ->withErrors();
         }
 
+        $startDate = Carbon::parse($request['start_date'])->format('Y-m-d');
+        $endDate = Carbon::parse($request['end_date'])->format('Y-m-d');
+
         Project::updateOrCreate([
-            'id'     => $request['project_id'],
+            'id' => $request['project_id'],
         ],[
             'project_number' => $request['project_number'],
             'name'           => $request['name'],
             'type'           => $request['type'],
-            'start_date'     => date('Y-m-d'),
-            'end_date'       => date('Y-m-d'),
+            'start_date'     => $startDate,
+            'end_date'       => $endDate,
             'liability_max'  => $request['liability_max'],
             'liability_min'  => $request['liability_min'],
             'currency'       => $request['currency'],

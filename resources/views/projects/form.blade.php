@@ -43,7 +43,7 @@
                 {!! Form::select('currency', $currencies, !is_null($project) ? $project->currency : '', ['class' => 'toggled-liability-field']) !!}
 
                 {!! Form::label('countries[]', 'Teilnehmende Länder') !!}
-                {!! Form::select('countries[]', $countries, !is_null($project) ? $project->countries : '', ['multiple', 'required']) !!}
+                {!! Form::select('countries[]', $countries, !is_null($project) ? json_decode($project->countries) : '', ['multiple', 'required']) !!}
 
                 {!! Form::submit('Speichern') !!}
             {!! Form::close() !!}
