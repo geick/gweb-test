@@ -23,6 +23,10 @@ select {
     padding:  0.25rem;
 }
 
+textarea {
+    width:  250px;
+}
+
 .toggled-liability-field {
     display: none;
 }
@@ -30,4 +34,15 @@ select {
 .multiselect {
     width:  100px;
     height: 200px;
+}
+
+.optional-field-template {
+    display:  none;
+}
+
+.optional-field-wrapper {
+    margin-top:  1rem;
+    width:  500px;
+    display: flex;
+    justify-content: space-between;
 }

@@ -69,18 +69,19 @@ class ProjectController extends Controller
     function store(Request $request)
     {
         if (!$request->validate([
-            'project_number' => 'required|regex:/\d{5}-\d{4}/',
-            'name'           => 'required|string',
-            'type'           => 'required',
-            'start_date'     => 'date',
-            'end_date'       => 'date',
-            'liability_max'  => 'required_if:type,3',
-            'liability_min'  => 'required_if:type,3',
-            'currency'       => 'required_if:type,3',
-            'countries'      => 'required',
-            'market_list'    => 'mimes:xlsx,csv',
+            'project_number'  => 'required|regex:/\d{5}-\d{4}/',
+            'name'            => 'required|string',
+            'type'            => 'required',
+            'start_date'      => 'date',
+            'end_date'        => 'date',
+            'liability_max'   => 'required_if:type,3',
+            'liability_min'   => 'required_if:type,3',
+            'currency'        => 'required_if:type,3',
+            'countries'       => 'required',
+            'market_list'     => 'mimes:xlsx,csv',
+            'optional_fields' => 'string',
         ])) {
-            return redirect()->route('projects.create')
+            return redirect()->back()
                 ->withInput()
                 ->withErrors();
         }
@@ -91,16 +92,17 @@ class ProjectController extends Controller
         $project = Project::updateOrCreate([
             'id' => $request['project_id'],
         ],[
-            'project_number' => $request['project_number'],
-            'name'           => $request['name'],
-            'type'           => $request['type'],
-            'start_date'     => $startDate,
-            'end_date'       => $endDate,
-            'liability_max'  => $request['liability_max'],
-            'liability_min'  => $request['liability_min'],
-            'currency'       => $request['currency'],
-            'countries'      => json_encode($request['countries']),
-            'has_file'       => $request->has('market_list'),
+            'project_number'  => $request['project_number'],
+            'name'            => $request['name'],
+            'type'            => $request['type'],
+            'start_date'      => $startDate,
+            'end_date'        => $endDate,
+            'liability_max'   => $request['liability_max'],
+            'liability_min'   => $request['liability_min'],
+            'currency'        => $request['currency'],
+            'countries'       => json_encode($request['countries']),
+            'has_file'        => $request->has('market_list'),
+            'optional_fields' => $request['optional_fields'],
         ]);
 
         $project->save();

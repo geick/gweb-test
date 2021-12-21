@@ -22,5 +22,6 @@ class Project extends Model
         'currency',
         'countries',
         'has_file',
+        'optional_fields',
     ];
 }

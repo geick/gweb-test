@@ -52,9 +52,42 @@
                 {!! Form::label('market_list', 'Upload Marktliste') !!}
                 {!! Form::file('market_list') !!}
 
+                {!! Form::hidden('optional_fields', !is_null($project) ? $project->optional_fields : '', ['class' => 'optional-fields']) !!}
+
+                @php
+                    $optionalFields = json_decode($project->optional_fields);
+                @endphp
+
+                @if ($optionalFields)
+                    @foreach($optionalFields as $field)
+                        <div class="optional-field">
+                            <h4>Optionales Feld <span class="optional-field-index">1</span></h4>
+
+                            <div class="optional-field-wrapper">
+                                <div>
+                                    {!! Form::label('field-name', 'Feldname') !!}
+                                    {!! Form::text('field-name', $field[0]) !!}
+                                </div>
+                                <div>
+                                    {!! Form::label('field-values', 'erlaubte Feldwerte') !!}
+                                    {!! Form::textarea('field-values', $field[1], ['rows' => 4]) !!}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+
+                <a href="" class="add-optional-field">Optionales Feld hinzufügen</a>
+
                 {!! Form::submit('Speichern') !!}
             {!! Form::close() !!}
+
+            @include('projects.templates.optional-field')
         </div>
-    </section
+    </section>
+
+    <section>
+        <a href="{{ route('projects.index') }}">Zurück</a>
+    </section>
 
 @endsection
