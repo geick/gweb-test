@@ -2,6 +2,27 @@ body {
     font-family: sans-serif;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid gray;
+    padding:  0.5rem;
+}
+
 input, select, label {
     display:  block;
+}
+
+input, select {
+    margin-bottom: 1rem;
+}
+
+select {
+    padding:  0.25rem;
+}
+
+.toggled-liability-field {
+    display: none;
 }

@@ -106,7 +106,7 @@ return [
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'Das Format von :attribute ist nicht gültig.',
     'required' => ':attribute ist ein Pflichtfeld.',
-    'required_if' => 'The :attribute field is required when :other is :value.',
+    'required_if' => ':attribute ist ein Pflichtfeld, wenn :other :value ist.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
     'required_with_all' => 'The :attribute field is required when :values are present.',

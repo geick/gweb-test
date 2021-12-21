@@ -24,9 +24,9 @@ class CreateProjectsTable extends Migration
             $table->string('type');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('liability_min');
-            $table->integer('liability_max');
-            $table->string('currency');
+            $table->integer('liability_min')->nullable();
+            $table->integer('liability_max')->nullable();
+            $table->string('currency')->nullable();
             $table->json('countries');
             $table->boolean('has_file');
             $table->timestamps();

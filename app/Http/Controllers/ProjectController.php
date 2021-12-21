@@ -23,8 +23,10 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    function create()
+    function edit($projectId = 0)
     {
+        $project = Project::find($projectId);
+
         $countries = [
             "D" => "D",
             "AT" => "AT",
@@ -57,7 +59,8 @@ class ProjectController extends Controller
         return view('projects/create', compact([
             'countries',
             'currencies',
-            'projectTypes'
+            'projectTypes',
+            'project'
         ]));
     }
 
@@ -74,9 +77,9 @@ class ProjectController extends Controller
             'type'           => 'required',
             'start_date'     => 'date',
             'end_date'       => 'date',
-            'liability_max'  => 'required|numeric',
-            'liability_min'  => 'required|numeric',
-            'currency'       => 'required',
+            'liability_max'  => 'required_if:type,3',
+            'liability_min'  => 'required_if:type,3',
+            'currency'       => 'required_if:type,3',
             'countries'      => 'required',
         ])) {
             return redirect()->route('projects.create')
@@ -84,7 +87,8 @@ class ProjectController extends Controller
                 ->withErrors();
         }
 
-        $newProject = Project::create([
+        Project::updateOrCreate([
+            'id'     => $request['project_id'],
             'project_number' => $request['project_number'],
             'name'           => $request['name'],
             'type'           => $request['type'],
@@ -95,7 +99,7 @@ class ProjectController extends Controller
             'currency'       => $request['currency'],
             'countries'      => json_encode($request['countries']),
             'has_file'       => false,
-        ]);
+        ])->save();
 
         return redirect('/');
     }
