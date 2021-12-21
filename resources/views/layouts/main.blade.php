@@ -6,7 +6,7 @@
 
         <title>Gweb-Probeaufgabe</title>
 
-        <link href="/css/app.css" rel="stylesheet" type="text/css"/>
+        <link href="{{ mix('/css/app.css') }}" rel="stylesheet" type="text/css"/>
         <link href="/css/datepicker.min.css" rel="stylesheet" type="text/css"/>
 
         <script src="/js/jquery.min.js" defer></script>
@@ -15,6 +15,5 @@
     </head>
     <body>
         @yield('content')
-
     </body>
 </html>

@@ -26,3 +26,8 @@ select {
 .toggled-liability-field {
     display: none;
 }
+
+.multiselect {
+    width:  100px;
+    height: 200px;
+}

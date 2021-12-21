@@ -28,10 +28,10 @@ class ProjectController extends Controller
      */
     function create()
     {
+        $project = null;
         $countries = Config::get('projects.countries');
         $currencies = Config::get('projects.currencies');
         $projectTypes = Config::get('projects.types');
-        $project = null;
 
         return view('projects/form', compact([
             'countries',
@@ -78,6 +78,7 @@ class ProjectController extends Controller
             'liability_min'  => 'required_if:type,3',
             'currency'       => 'required_if:type,3',
             'countries'      => 'required',
+            'market_list'    => 'mimes:xlsx,csv',
         ])) {
             return redirect()->route('projects.create')
                 ->withInput()
@@ -87,7 +88,7 @@ class ProjectController extends Controller
         $startDate = Carbon::parse($request['start_date'])->format('Y-m-d');
         $endDate = Carbon::parse($request['end_date'])->format('Y-m-d');
 
-        Project::updateOrCreate([
+        $project = Project::updateOrCreate([
             'id' => $request['project_id'],
         ],[
             'project_number' => $request['project_number'],
@@ -99,8 +100,16 @@ class ProjectController extends Controller
             'liability_min'  => $request['liability_min'],
             'currency'       => $request['currency'],
             'countries'      => json_encode($request['countries']),
-            'has_file'       => false,
-        ])->save();
+            'has_file'       => $request->has('market_list'),
+        ]);
+
+        $project->save();
+
+        // File upload
+        if ($request->has('market_list')) {
+            $path = $request->file('market_list')
+                ->storeAs('market lists', $project->id. '.xls');
+        }
 
         return redirect('/');
     }

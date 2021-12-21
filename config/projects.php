@@ -14,8 +14,8 @@ return [
         "GB" => "GB",
     ],
     'currencies' => [
-        "€",
-        "£"
+        "EUR",
+        "SF"
     ],
     'types' => [
         "Prämienbestellung",
