@@ -23,5 +23,10 @@ class Project extends Model
         'countries',
         'has_file',
         'optional_fields',
+        'value_missing',
+        'value_invalid',
+        'value_exceeding',
+        'receipt_status_invalid',
+        'priority_case',
     ];
 }

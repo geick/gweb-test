@@ -12,6 +12,7 @@ $(document).ready(function () {
     initDynamicProjectTypes();
     initDatepickers();
     initOptionalFields();
+    initSpecialCases();
   }
 }); // Toggle fields depending on specific project type
 
@@ -64,6 +65,13 @@ function initOptionalFields() {
     $newOptionalField = $optionalFieldTemplate.clone(true);
     $newOptionalField.removeClass('optional-field-template').addClass('optional-field').find('.optional-field-index').text(optionalFieldsCount + 1);
     $($newOptionalField).insertBefore('.add-optional-field');
+  });
+} // Populate priority-dropdown with selected cases
+
+
+function initSpecialCases() {
+  $('.special-cases input').change(function (event) {
+    $(event.target);
   });
 }
 

@@ -54,30 +54,72 @@
 
                 {!! Form::hidden('optional_fields', !is_null($project) ? $project->optional_fields : '', ['class' => 'optional-fields']) !!}
 
-                @php
-                    $optionalFields = json_decode($project->optional_fields);
-                @endphp
+                @if (!is_null($project))
+                    @php
+                        $optionalFields = json_decode($project->optional_fields);
+                    @endphp
 
-                @if ($optionalFields)
-                    @foreach($optionalFields as $field)
-                        <div class="optional-field">
-                            <h4>Optionales Feld <span class="optional-field-index">1</span></h4>
+                    @if ($optionalFields)
+                        @foreach($optionalFields as $field)
+                            <div class="optional-field">
+                                <h4>Optionales Feld <span class="optional-field-index">1</span></h4>
 
-                            <div class="optional-field-wrapper">
-                                <div>
-                                    {!! Form::label('field-name', 'Feldname') !!}
-                                    {!! Form::text('field-name', $field[0]) !!}
-                                </div>
-                                <div>
-                                    {!! Form::label('field-values', 'erlaubte Feldwerte') !!}
-                                    {!! Form::textarea('field-values', $field[1], ['rows' => 4]) !!}
+                                <div class="optional-field-wrapper">
+                                    <div>
+                                        {!! Form::label('field-name', 'Feldname') !!}
+                                        {!! Form::text('field-name', $field[0]) !!}
+                                    </div>
+                                    <div>
+                                        {!! Form::label('field-values', 'erlaubte Feldwerte') !!}
+                                        {!! Form::textarea('field-values', $field[1], ['rows' => 4]) !!}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 @endif
 
                 <a href="" class="add-optional-field">Optionales Feld hinzufügen</a>
+
+                <div class="special-cases">
+                    <h4>Sonderfälle</h4>
+                    {!! Form::label('value_missing', 'Fehlender Feldwert'); !!}
+                    {!! Form::checkbox('value_missing', '', !is_null($project) && $project->value_missing); !!}
+
+                    {!! Form::label('value_invalid', 'Ungültiger Feldwert'); !!}
+                    {!! Form::checkbox('value_invalid', '', !is_null($project) && $project->value_invalid); !!}
+
+                    {!! Form::label('value_exceeding', 'Feldwert nicht innerhalb erlaubter Grenzen'); !!}
+                    {!! Form::checkbox('value_exceeding', '', !is_null($project) && $project->value_exceeding); !!}
+
+                    {!! Form::label('receipt_status_invalid', 'Ungültiger Belegstatus'); !!}
+                    {!! Form::checkbox('receipt_status_invalid', '', !is_null($project) && $project->receipt_status_invalid); !!}
+
+                    {!! Form::label('priority_case', 'Priorisierter Sonderfall') !!}
+                    <select name="priority_case">
+                        <option></option>
+                        <option {{ !is_null($project) && $project->value_missing ?: 'hidden' }} value="0"
+                            {{ !is_null($project) && $project->priority_case != 0 ?: 'selected' }}
+                        >
+                            Fehlender Grenzwert
+                        </option>
+                        <option {{ !is_null($project) && $project->value_invalid ?: 'hidden' }} value="1"
+                            {{ !is_null($project) && $project->priority_case != 1 ?: 'selected' }}
+                        >
+                            ungültiger Grenzwert
+                        </option>
+                        <option {{ !is_null($project) && $project->value_exceeding ?: 'hidden' }} value="2"
+                            {{ !is_null($project) && $project->priority_case != 2 ?: 'selected' }}
+                        >
+                            Feldwert nicht innerhalb erlaubter Grenzen
+                        </option>
+                        <option {{ !is_null($project) && $project->receipt_status_invalid ?: 'hidden' }} value="3"
+                            {{ !is_null($project) && $project->priority_case != 3 ?: 'selected' }}
+                        >
+                            Ungültiger Belegstatus
+                        </option>
+                    </select>
+                </div>
 
                 {!! Form::submit('Speichern') !!}
             {!! Form::close() !!}
